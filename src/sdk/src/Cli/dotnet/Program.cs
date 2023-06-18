@@ -27,6 +27,13 @@ namespace Microsoft.DotNet.Cli
 
         public static int Main(string[] args)
         {
+            // opt out of telemetry by default if the env var is unset
+            string telemetryValue = Environment.GetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT");
+            if (String.IsNullOrEmpty(telemetryValue))
+            {
+                Environment.SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "1");
+            }
+
             //setting output encoding is not available on those platforms
             if (!OperatingSystem.IsIOS() && !OperatingSystem.IsAndroid() && !OperatingSystem.IsTvOS())
             {
