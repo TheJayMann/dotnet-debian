@@ -1,0 +1,9 @@
+# This currently is not used, as uscan and mk-origtargz will always build
+# a tarball to be extracted to its destination.  It is much more efficient
+# to keep this process in git.
+version=3
+opts="mode=git, gitexport=all, \
+repacksuffix=+dfsg, \
+dversionmangle=s/\+dfsg//, \
+uversionmangle=s/(\d)\.100/$1.0/;s/(\d)\-((rc|preview)\d*)/$1~$2/" \
+https://github.com/dotnet/dotnet/ refs/tags/v?@ANY_VERSION@

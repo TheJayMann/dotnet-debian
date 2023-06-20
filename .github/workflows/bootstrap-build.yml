@@ -1,0 +1,25 @@
+name: Bootstrap Build
+on: 
+  workflow_dispatch:
+jobs:
+  build-debs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Build source package
+        # TODO: potentially configure lintian run
+        uses: jtdor/build-deb-action@v1
+        env:
+          DEB_BUILD_PROFILES: pkg.dotnet8.bootstrap
+        with:
+          buildpackage-opts: -S --no-sign
+          docker-image: debian:unstable-slim
+          extra-build-deps: git-buildpackage
+          before-build-hook: gbp export-orig --compression=xz --compression-level=9 --force-create
+      - name: Upload source package as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: packages
+          path: debian/artifacts

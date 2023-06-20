@@ -1,0 +1,24 @@
+dotnet8
+=======
+This is the .NET 8.0 package for Debian.
+
+Source format
+------------
+
+The source for this package is managed via GIT using DEP14 format.  A versioned
+patch queue branch based on upstream is kept and published so that it may be
+used as the target of SourceLink, so that SourceLink may have a more accurate
+view of what has been built.  If a versioned release has no patch queue, then
+SourceLink should use the upstream.  A debian branch is based on the upstream
+branch independent of the patch queue branch.
+
+When a new release is available, the upstream/latest branch should be set to the
+new release tag, files matching Files-Excluded should be removed and committed
+allowing upstream/latest to be able to generate a proper orig tar, and
+upstream/latest should be versioned tagged following DEP14.
+
+Self hosting status
+-------------------
+
+As of preview.2, the SDK is not able to build itself.  It is only capable of
+being built using the bootstrap process.

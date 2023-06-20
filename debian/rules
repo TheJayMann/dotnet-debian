@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/architecture.mk
+
+%:
+	dh $@
+
+build:
+ifneq ($(filter pkg.dotnet8.bootstrap,$(DEB_BUILD_PROFILES)),)
+	debian/build.sh --bootstrap
+else
+	debian/build.sh
+endif
+
+override_dh_install:
+	mkdir -p debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/dotnet/source-built-artifacts
+	tar xzf artifacts/x64/Release/dotnet-sdk-*-x64.tar.gz -C debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/dotnet
+	cp artifacts/x64/Release/Private.SourceBuilt.*-x64.tar.gz debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/dotnet/source-built-artifacts
+
+	mkdir -p debian/tmp/etc/dotnet
+	echo /usr/lib/$(DEB_HOST_MULTIARCH)/dotnet/ > debian/tmp/etc/dotnet/install_location
+
+    # cleanup permissions from the targeting packs
+	chmod -R -x+X debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/dotnet/sdk-manifests/*
+	chmod -R -x+X debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/dotnet/packs/*
+	dh_install
+
+ # Disable dh_dwz, as currently dwz does not support the executable format generated
+ override_dh_dwz:

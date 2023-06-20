@@ -1,0 +1,202 @@
+Source: dotnet8
+Section: devel
+Priority: optional
+Maintainer: TheJayMann <736769+TheJayMann@users.noreply.github.com>
+Build-Depends: 
+ debhelper-compat (= 13),
+ dotnet-sdk-8.0 <!pkg.dotnet8.bootstrap>,
+ dotnet-sdk-8.0-source-built-artifacts <!pkg.dotnet8.bootstrap>,
+ fuse-overlayfs <!pkg.dotnet8.bootstrap>,
+ clang,
+ cmake,
+ curl,
+ gdb,
+ git,
+ iputils-ping,
+ libicu-dev,
+ libkrb5-dev,
+ liblttng-ust-dev,
+ libssl-dev,
+ llvm,
+ locales,
+ locales-all,
+ python3-dev,
+ python3-pip,
+ quilt,
+ tzdata
+Standards-Version: 4.5.1
+Homepage: https://github.com/dotnet/dotnet/
+Rules-Requires-Root: no
+
+Package: dotnet-sdk-8.0 
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ dotnet-runtime-8.0 (>= ${binary:Version}),
+ aspnetcore-runtime-8.0 (>= ${binary:Version}),
+ dotnet-targeting-pack-8.0 (>= ${binary:Version}),
+ aspnetcore-targeting-pack-8.0 (>= ${binary:Version}),
+ netstandard-targeting-pack-2.1 (>= ${binary:Version}),
+ dotnet-apphost-pack-8.0 (>= ${binary:Version}),
+ dotnet-templates-8.0 (>= ${binary:Version}),
+ ${shlibs:Depends},
+ ${misc:Depends}
+Provides:
+ dotnet8 (= ${binary:Version}),
+ dotnet (= ${binary:Version})
+Description: .NET SDK 8.0
+ A cross-platform runtime for cloud, mobile, desktop, and IoT apps.
+ .
+ This package contains the .NET development kit necessary to create
+ new applications based on .NET.
+
+Package: aspnetcore-runtime-8.0
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ dotnet-runtime-8.0 (>= ${binary:Version}),
+ ${shlibs:Depends},
+ ${misc:Depends}
+Description: ASP.NET Core 8.0 runtime
+ A cross-platform runtime for cloud, mobile, desktop, and IoT apps.
+ .
+ This package allows execution of framework dependent applications developed
+ with ASP.NET Core.
+Provides:
+ libaspnetcore-8.0-cil
+
+Package: dotnet-runtime-deps-8.0
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ libgcc-s1,
+ libgssapi-krb5-2,
+ libicu72 | libicu73,
+ libssl3,
+ libstdc++6,
+ zlib1g,
+ ${misc:Depends}
+Description: .NET 8.0 dependency package
+ A cross-platform runtime for cloud, mobile, desktop, and IoT apps.
+ .
+ This metapackage ensures all native depencencies of .NET is installed.
+
+Package: dotnet-runtime-8.0
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ dotnet-hostfxr-8.0 (>= ${binary:Version}),
+ dotnet-runtime-deps-8.0 (>= ${binary:Version}),
+ ${shlibs:Depends},
+ ${misc:Depends}
+Description: .NET 8.0 runtime
+ A cross-platform runtime for cloud, mobile, desktop, and IoT apps.
+ .
+ This package allows execution of applications developed for .NET.
+Provides:
+ libdotnet-8.0-cil
+
+Package: dotnet-hostfxr-8.0
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ dotnet-host (>= ${binary:Version}),
+ ${shlibs:Depends},
+ ${misc:Depends}
+Description: .NET 8.0 host
+ A cross-platform runtime for cloud, mobile, desktop, and IoT apps.
+ .
+ This package provides the version dependent dotnet executable,
+ allowing to run framework dependent applications developed with .NET.
+
+Package: dotnet-host
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends}
+Description: .NET host
+ A cross-platform runtime for cloud, mobile, desktop, and IoT apps.
+ .
+ This package provices the version independent dotnet executable.
+ When used to execute an application developed with .NET, it will
+ attempt to find the most appropriate version dependent dotnet
+ executable for the application.
+
+Package: dotnet-apphost-pack-8.0
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends}
+Description: .NET 8.0 app host pack
+ A cross-platform runtime for cloud, mobile, desktop, and IoT apps.
+ .
+ This package allows building a .NET executable as a native executable
+ which can be run directly without requiring the dotnet executable.
+
+Package: dotnet-targeting-pack-8.0
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends}
+Description: .NET 8.0 targeting pack
+ A cross-platform runtime for cloud, mobile, desktop, and IoT apps.
+ .
+ This package allows building a .NET application targeting this version
+ of .NET instead of targeting the latest installed version.
+Provides:
+ libdotnet-8.0-cil-dev
+
+Package: aspnetcore-targeting-pack-8.0
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ dotnet-targeting-pack-8.0 (>= ${binary:Version}),
+ ${shlibs:Depends},
+ ${misc:Depends}
+Description: ASP.NET Core 8.0 targeting pack
+ A cross-platform runtime for cloud, mobile, desktop, and IoT apps.
+ .
+ This package allows building an ASP.NET Core application targeting this
+ version of ASP.NET Core instead of targeting the latest installed version.
+Provides:
+ libaspnetcore-8.0-cil-dev
+ 
+Package: netstandard-targeting-pack-2.1
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends}
+Description: .NET Standard targeting pack
+ A cross-platform runtime for cloud, mobile, desktop, and IoT apps.
+ .
+ This package allows building a .NET library targeting .NET Standard.
+Provides:
+ libnetstandard-2.1-cil-dev
+
+Package: dotnet-templates-8.0
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends}
+Description: .NET 8.0 project templates
+ A cross-platform runtime for cloud, mobile, desktop, and IoT apps.
+ .
+ This package contains templates for creating new projects and files
+ within projects for creating .NET applications.
+
+Package: dotnet-sdk-8.0-source-built-artifacts
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends}
+Description: .NET 8.0 project templates
+ A cross-platform runtime for cloud, mobile, desktop, and IoT apps.
+ .
+ This package contains artifacts generated when building the .NET SDK
+ which is required to build later versions of the .NET SDK.

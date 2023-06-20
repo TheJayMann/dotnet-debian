@@ -1,0 +1,4 @@
+etc/dotnet/install_location
+usr/lib/*/dotnet/dotnet
+usr/lib/*/dotnet/LICENSE.txt
+usr/lib/*/dotnet/ThirdPartyNotices.txt

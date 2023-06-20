@@ -1,0 +1,25 @@
+# the rfc is not included, only code referencing the rfc
+dotnet8 source: license-problem-non-free-RFC [src/installer/THIRD-PARTY-NOTICES]
+dotnet8 source: license-problem-non-free-RFC [*/THIRD-PARTY-NOTICES.TXT]
+
+# the source for these files appear to already be included, but not detected by lintian
+dotnet8 source: source-is-missing [src/aspnetcore/src/Components/Web.JS/dist/Release/blazor.server.js]
+dotnet8 source: source-is-missing [src/aspnetcore/src/Components/Web.JS/dist/Release/blazor.webview.js]
+
+# these files appear to be original source
+dotnet8 source: source-is-missing [src/aspnetcore/src/Components/benchmarkapps/Wasm.Performance/TestApp/wwwroot/benchmarks/jsonHandlingData.js]
+dotnet8 source: source-is-missing [src/aspnetcore/src/Identity/UI/src/assets/V4/lib/jquery-validation/dist/additional-methods.js]
+dotnet8 source: source-is-missing [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/bootstrap/dist/js/bootstrap.bundle.js]
+dotnet8 source: source-is-missing [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/bootstrap/dist/js/bootstrap.esm.js]
+dotnet8 source: source-is-missing [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/bootstrap/dist/js/bootstrap.js]
+dotnet8 source: source-is-missing [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/jquery-validation/dist/additional-methods.js]
+dotnet8 source: source-is-missing [src/aspnetcore/src/Identity/testassets/Identity.DefaultUI.WebSite/wwwroot/lib/jquery-validation/dist/additional-methods.js]
+dotnet8 source: source-is-missing [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/*/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js]
+dotnet8 source: source-is-missing [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/*/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js]
+dotnet8 source: source-is-missing [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/*/wwwroot/lib/bootstrap/dist/js/bootstrap.js]
+dotnet8 source: source-is-missing [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/*/wwwroot/lib/jquery-validation/dist/additional-methods.js]
+dotnet8 source: source-is-missing [src/installer/src/redist/targets/packaging/osx/clisdk/resources/ru.lproj/welcome.html]
+dotnet8 source: source-is-missing [src/runtime/src/installer/pkg/sfx/bundle/osx_resources/ru.lproj/welcome.html]
+dotnet8 source: source-is-missing [src/sdk/src/BuiltInTools/BrowserRefresh/WebSocketScriptInjection.js]
+dotnet8 source: source-is-missing [src/sdk/src/Tests/Microsoft.AspNetCore.Watch.BrowserRefresh.Tests/wwwroot/largefile.html]
+dotnet8 source: source-is-missing [src/source-build-externals/src/azure-activedirectory-identitymodel-extensions-for-dotnet/NOTICE.html]

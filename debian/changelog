@@ -1,0 +1,6 @@
+dotnet8 (8.0.0~preview.2+dfsg-1) experimental; urgency=low
+
+  * .NET 8.0 Preview 2
+  * Initial release. (Closes: #779969,#779970)
+
+ -- TheJayMann <736769+TheJayMann@users.noreply.github.com>  Mon, 19 Jun 2023 03:50:17 +0000

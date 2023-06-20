@@ -1,0 +1,3 @@
+usr/lib/*/dotnet/sdk/
+usr/lib/*/dotnet/sdk-manifests/
+usr/lib/*/dotnet/metadata/

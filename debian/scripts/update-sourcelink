@@ -1,0 +1,6 @@
+#/bin/sh
+
+# This script finds the commit containing the patched upstream and records it
+# so that it will be used for SourceLink.
+
+> debian/SourceLink/HEAD git rev-parse patch-queue/debian/latest

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+cd -P -- "$( dirname -- "${BASH_SOURCE[0]}" )"
+
+source ../version.conf
+
+git for-each-ref --format='%(refname)' | while read ref
+do
+  if [[ $(echo "$ref" | sed -nr "$REF_VERSION" | sed -r "$UVERSION_MANGLE") = $1 ]]; then
+    echo "setting upstream to $ref"
+    git branch -f upstream/latest $ref
+    break
+  fi
+done

@@ -1,0 +1,31 @@
+#/bin/sh
+
+# This script takes the upstream/latest branch and removes all files matching
+# the Files-Excluded stanza in the debian/copyright file. This requires that
+# the Files-Excluded has a single pattern per line, and that, if the
+# Files-Excluded stanza is not the last field of the header, that there only
+# be a single blank line after the header, and that it not contain any spaces.
+# This script will not create an upstream version tag.
+
+UPSTREAM_DIR=$(mktemp -dt upstream-latest-XXXXXXXX)
+CURRENT_GIT_DIR=$(git rev-parse --show-toplevel)
+
+git worktree add $UPSTREAM_DIR upstream/latest
+cp $CURRENT_GIT_DIR/debian/copyright $UPSTREAM_DIR/copyright
+
+pushd $UPSTREAM_DIR
+grep -Pzo '(?<=Files-Excluded:\s)(\s\S*)+?(?=\n\S)' copyright | tr -d '\0' | grep -s . | sed -r 's=^\s*(\./)?(\S*)=./\2=' | (while read line; do find -path "$line" -type f -delete ; done;)
+rm copyright
+git commit -a -m "Remove Files-Excluded"
+popd
+
+git worktree remove $UPSTREAM_DIR
+
+source $CURRENT_GIT_DIR/debian/version.conf
+
+UVERSION_TAG=$(git describe --tags --abbrev=0 upstream/latest)
+OVERSION="$(git tag -l "$UVERSION_TAG" --format='%(refname)' | sed -nr "$REF_VERSION" | sed -r "$UVERSION_MANGLE")"
+OVERSION="$OVERSION$REPACK_SUFFIX"
+OVERSION_TAG=$(echo "$OVERSION" | perl -pe 'y/:~/%_/;s/\.(?=\.|$|lock$)/.#/g')
+git tag -f upstream/$OVERSION_TAG upstream/latest
+
